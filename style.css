@@ -1,0 +1,237 @@
+/* THEME TOKENS & BASE LAYOUT ------------------ */
+:root {
+  --bg0: #070b12;
+  --bg1: #0c1628;
+  --grad1: #162b55;
+  --grad2: #431a5b;
+  --glass: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.14);
+  --ink: #e9eef6;
+  --mut: #9fb3d1;
+  --good: #37d67a;
+  --bad: #ff4d4f;
+  --gold: #ffd166;
+  --btn: #6c8cff;
+  --btn2: #8a5bff;
+}
+
+body {
+  margin: 0;
+  font: 16px/1.5 ui-sans-serif, system-ui, Segoe UI, Roboto, Arial;
+  color: var(--ink);
+  background: radial-gradient(1200px 800px at 15% -20%, var(--grad1), var(--bg0)) fixed;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND BLOOMS --------------------------- */
+.bg::before,
+.bg::after {
+  content: "";
+  position: fixed;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: .35;
+}
+.bg::before {
+  background: radial-gradient(circle at 40% 40%, var(--grad2), transparent 60%);
+  top: -20vmax;
+  right: -20vmax;
+}
+.bg::after {
+  background: radial-gradient(circle at 60% 50%, #1b4db7, transparent 60%);
+  bottom: -30vmax;
+  left: -15vmax;
+}
+
+/*  CONTAINER ----------------------------------- */
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/*  HUD & PROGRESS ------------------------------ */
+.hud {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  backdrop-filter: blur(6px);
+  margin-bottom: 16px;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.logo  { font-size: 26px; filter: drop-shadow(0 0 8px rgba(255,255,255,.25)); }
+.hud h1 { margin: 0; letter-spacing: .3px; }
+.tag { margin: 6px 0 0; color: var(--mut); }
+.ph  { color: var(--bad); font-weight: 700; }
+.sf  { color: var(--good); font-weight: 700; }
+
+.progresswrap {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+.progressbar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--good), #ffb86c, var(--bad));
+  transition: width .25s ease;
+}
+.progresslabel { color: var(--mut); font-size: 14px; }
+
+/*  CARDS & ANIM ------------------------------- */
+.card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  backdrop-filter: blur(8px);
+  margin: 16px 0;
+}
+.rise { animation: rise .45s ease both; }
+@keyframes rise { from { transform: translateY(8px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/*  META HEADERS & TITLES --------------------- */
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.title { font-size: 20px; font-weight: 800; }
+.pill  { font-size: 12px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px; color: var(--mut); }
+
+/*  TIMER UI ---------------------------------- */
+.timerwrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  min-width: 240px;
+}
+.timerbar {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.timerfill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #22c55e, #f59e0b, #ef4444);
+  transform-origin: left center;
+  transition: width .15s linear;
+}
+.timerlabel {
+  color: var(--mut);
+  font-size: 14px;
+  min-width: 48px;
+  text-align: right;
+}
+
+/*  MESSAGE & CHOICES ------------------------- */
+.sample {
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: 14px;
+  white-space: pre-wrap;
+  margin-top: 10px;
+}
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 14px 0 6px;
+}
+.choice {
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .5px;
+  font-size: 16px;
+  cursor: pointer;
+  transform: translateZ(0);
+  transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+.choice:hover { transform: translateY(-2px); }
+.choice:active { transform: translateY(0); filter: brightness(.95); }
+.choice.phish { background: linear-gradient(180deg, #ff4d4f, #9a1f2e); }
+.choice.safe  { background: linear-gradient(180deg, #2dcc70, #1e6e4e); }
+
+/*  FEEDBACK STATE ----------------------------- */
+.after { margin-top: 8px; }
+.result { font-weight: 900; letter-spacing: .3px; margin: 8px 0; }
+.result.ok  { color: var(--good); }
+.result.bad { color: var(--bad); }
+
+/*  BUTTONS ------------------------------------ */
+.cta, .cta-lite, .ghostbtn, .dangerbtn {
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: .4px;
+  color: #fff;
+}
+.cta {
+  background: linear-gradient(180deg, var(--btn), var(--btn2));
+  box-shadow: 0 12px 28px rgba(108,140,255,.25);
+}
+.cta-lite {
+  background: linear-gradient(180deg, #3e64ff, #2c47b8);
+  box-shadow: 0 12px 28px rgba(62,100,255,.2);
+}
+.ghostbtn { background: rgba(255,255,255,.06); }
+.dangerbtn {
+  background: linear-gradient(180deg, #e24a4a, #a61d2a);
+  box-shadow: 0 12px 28px rgba(226,74,74,.2);
+}
+.row-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* INPUTS & TEXT HELPERS ---------------------- */
+input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.35);
+  color: var(--ink);
+  margin: 6px 0 10px;
+}
+
+.muted { color: var(--mut); }
+.small { font-size: 13px; }
+.hidden { display: none; }
+
+footer.credits { text-align: center; margin: 10px 0 20px; color: var(--mut); }
+
+/*  FX OVERLAY & FUTURE A11Y ----------------- */
+.fx {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+}

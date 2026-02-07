@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Catch the Phish — Arcade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--  Background FX -->
+  <div class="bg"></div>
+
+  <div class="container">
+    <!--  HUD / Header -->
+    <header class="hud">
+      <div class="brand">
+        <span class="logo">🎯</span>
+        <h1>Catch the Phish</h1>
+      </div>
+      <p class="tag">Decide fast: <span class="ph">PHISH</span> or <span class="sf">SAFE</span>. Watch for subtle clues.</p>
+
+      <!--  Progress + label -->
+      <div class="progresswrap">
+        <div class="progressbar"><div id="progressBar" class="progress"></div></div>
+        <div id="progress" class="progresslabel">Round 0 / 0</div>
+      </div>
+    </header>
+
+    <!--Start Section -->
+    <section id="start" class="card rise">
+      <h2>New Run</h2>
+      <!--  Name + Rounds controls -->
+      <label>Your name</label>
+      <input id="playerName" placeholder="Player">
+
+      <label>Rounds (1–10)</label>
+      <input id="rounds" type="number" min="1" max="10" value="6">
+
+      <button id="btnStart" class="cta">Start</button>
+      <p class="muted small">Questions are realistic: reply-chain hijacks, QR “fees”, MFA fatigue, vendor fraud, lookalike domains.</p>
+    </section>
+
+    <!--  Game Section -->
+    <section id="game" class="card hidden">
+      <div class="meta">
+        <!--  Title placeholder -->
+        <div id="title" class="title"></div>
+
+        <!--  TIMER -->
+        <div class="timerwrap">
+          <div class="timerbar"><div id="timerBar" class="timerfill"></div></div>
+          <div id="timerLabel" class="timerlabel">15s</div>
+        </div>
+      </div>
+
+      <!--  Message body -->
+      <pre id="msg" class="sample"></pre>
+
+      <!--  Choice buttons -->
+      <div class="choices">
+        <button class="choice phish" data-guess="phish">PHISH</button>
+        <button class="choice safe"  data-guess="safe">SAFE</button>
+      </div>
+
+      <!--  After answer area -->
+      <div id="after" class="after hidden">
+        <div id="result" class="result"></div>
+        <div id="explain" class="muted"></div>
+        <button id="btnNext" class="ghostbtn">Next →</button>
+      </div>
+    </section>
+
+    <!--  Finish Section -->
+    <section id="finish" class="card hidden">
+      <h2>Run Complete</h2>
+      <div id="stats" class="muted"></div>
+
+      <!-- Leaderboard controls -->
+      <label>Save to leaderboard (local)</label>
+      <input id="leaderName" placeholder="Player">
+      <div class="row-btns">
+        <button id="btnSave" class="cta-lite">Save</button>
+        <button id="btnClear" class="dangerbtn">Clear leaderboard</button>
+      </div>
+
+      <h3>Leaderboard</h3>
+      <ol id="board"></ol>
+
+      <button id="btnAgain" class="ghostbtn">Play again</button>
+    </section>
+
+    <!--  Safety note -->
+    <footer class="credits muted small">
+      Offline demo. Data is synthetic. Learn the patterns; don’t click random links in real life.
+    </footer>
+  </div>
+
+  <!--  Fireworks / Confetti canvas -->
+  <canvas id="fx" class="fx"></canvas>
+
+  <!-- Keep script last -->
+  <script src="app.js"></script>
+</body>
+</html>
